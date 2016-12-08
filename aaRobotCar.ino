@@ -7,10 +7,10 @@
  */
 
  const int LedPin = 13;
- const int leftReverse = 4;
- const int rightReverse = 5;
- const int leftPower = 9;
- const int rightPower = 10;
+ const int leftRelay1 = 10;
+ const int leftRelay2 = 8;
+ const int rightRelay1 = 6; 
+ const int rightRelay2 = 4;
  const int pResistorFront1 = A0;
  const int pResistorFront2 = A1;
  int resistorValue;
@@ -19,10 +19,10 @@
 void setup(){
     //initialize digital output
     pinMode(LedPin, OUTPUT);
-    pinMode(leftReverse, OUTPUT);
-    pinMode(rightReverse, OUTPUT);
-    pinMode(leftPower, OUTPUT);
-    pinMode(rightPower, OUTPUT);
+    pinMode(leftRelay1, OUTPUT);
+    pinMode(leftRelay2, OUTPUT);
+    pinMode(rightRelay1, OUTPUT);
+    pinMode(rightRelay2, OUTPUT);
     
     //initialize analog input
     pinMode(pResistorFront1, INPUT);
@@ -33,72 +33,91 @@ void setup(){
 void loop(){
 
   standStill();
-  delay(300);
+  delay(1000);
   goForwards();
-  delay(300);
-  wideRightTurn();
-  wideLeftTurn();
+  delay(1000);
+  wideForwardRightTurn();
+  wideForwardLeftTurn();
   goBackwards();
-  delay(300);
+  delay(1000);
   tightLeftTurn();
   tightRightTurn();
   goForwards();
-  delay(300);
+  delay(1000);
   goBackwards();
-  delay(300);
+  delay(1000);
   standStill();
+  wideBackwardRightTurn();
+  wideBackwardLeftTurn();
+  standstill();
 }
 
 void standStill(){
- digitalWrite(leftReverse, LOW);
- digitalWrite(rightReverse, LOW);
- digitalWrite(leftPower, LOW);
- digitalWrite(rightPower, LOW);
+ digitalWrite(leftRelay1, HIGH);
+ digitalWrite(leftRelay2, HIGH);
+ digitalWrite(rightRelay1, HIGH);
+ digitalWrite(rightRelay2, HIGH);
 
 }
 void goBackwards(){
- digitalWrite(leftReverse, HIGH);
- digitalWrite(rightReverse, HIGH);
- digitalWrite(leftPower, HIGH);
- digitalWrite(rightPower, HIGH);
+ digitalWrite(leftRelay1, LOW);
+ digitalWrite(leftRelay2, HIGH);
+ digitalWrite(rightRelay1, LOW);
+ digitalWrite(rightRelay2, HIGH);
 }
 
 void goForwards(){
- digitalWrite(leftReverse, LOW);
- digitalWrite(rightReverse, LOW);
- digitalWrite(leftPower, HIGH);
- digitalWrite(rightPower, HIGH);
+ digitalWrite(leftRelay1, HIGH);
+ digitalWrite(leftRelay2, LOW);
+ digitalWrite(rightRelay1, HIGH);
+ digitalWrite(rightRelay2, LOW);
 }
 
-void wideLeftTurn(){
- digitalWrite(leftReverse, LOW);
- digitalWrite(rightReverse, LOW);
- digitalWrite(leftPower, HIGH);
- digitalWrite(rightPower, LOW);
- delay(300);
+void wideForwardLeftTurn(){
+ digitalWrite(leftRelay1, HIGH);
+ digitalWrite(leftRelay2, HIGH);
+ digitalWrite(rightRelay1, HIGH);
+ digitalWrite(rightRelay2, LOW);
+ delay(1000);
 }
 
-void wideRightTurn(){
- digitalWrite(leftReverse, LOW);
- digitalWrite(rightReverse, LOW);
- digitalWrite(leftPower, LOW);
- digitalWrite(rightPower, HIGH);
- delay(300);
+void wideBackwardLeftTurn(){
+ digitalWrite(leftRelay1, HIGH);
+ digitalWrite(leftRelay2, HIGH);
+ digitalWrite(rightRelay1, LOW);
+ digitalWrite(rightRelay2, HIGH);
+ delay(1000);
+}
+
+void wideForwardRightTurn(){
+ digitalWrite(leftRelay1, HIGH);
+ digitalWrite(leftRelay2, LOW);
+ digitalWrite(rightRelay1, HIGH);
+ digitalWrite(rightRelay2, HIGH);
+ delay(1000);
+}
+
+void wideBackwardRightTurn(){
+ digitalWrite(leftRelay1, LOW);
+ digitalWrite(leftRelay2, HIGH);
+ digitalWrite(rightRelay1, HIGH);
+ digitalWrite(rightRelay2, HIGH);
+ delay(1000);
 }
 
 void tightLeftTurn(){
- digitalWrite(leftReverse, LOW);
- digitalWrite(rightReverse, HIGH);
- digitalWrite(leftPower, HIGH);
- digitalWrite(rightPower, HIGH);
- delay(300);
+ digitalWrite(leftRelay1, LOW);
+ digitalWrite(leftRelay2, HIGH);
+ digitalWrite(rightRelay1, HIGH);
+ digitalWrite(rightRelay2, LOW);
+ delay(1000);
 }
 
 void tightRightTurn(){
- digitalWrite(leftReverse, HIGH);
- digitalWrite(rightReverse, LOW);
- digitalWrite(leftPower, HIGH);
- digitalWrite(rightPower, HIGH);
- delay(300);
+ digitalWrite(leftRelay1, HIGH);
+ digitalWrite(leftRelay2, LOW);
+ digitalWrite(rightRelay1, LOW);
+ digitalWrite(rightRelay2, HIGH);
+ delay(1000);
 }
 
